@@ -6,7 +6,9 @@ export const Colors = {
   tertiary: "#45FAD6"
 };
 
-export function getComplementaryColor({ color }) {
+export function getComplementaryColor(color) {
+  if(typeof color == "object") color = color.color;
+
   switch (color) {
     case Colors.primary: {
       return Colors.secondary;
