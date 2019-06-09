@@ -48,19 +48,23 @@ export default function RecommendationInput({
   recommendations
 }) {
   const [active, setActive] = React.useState(false);
+  let defaultOption = null;
   const rec = recommendations
     .filter(reco => reco.toLowerCase().indexOf(text.toLowerCase()) > -1)
-    .map((reco, i) => (
-      <Recommendation
-        key={i}
-        onClick={() => {
-          setText(reco);
-          setActive(false);
-        }}
-      >
-        {joinWithComponent(reco.split(text), <b>{text}</b>)}
-      </Recommendation>
-    ));
+    .map((reco, i) => {
+      if(i === 0) defaultOption = ()=> setText(reco);
+      return (
+        <Recommendation
+          key={i}
+          onClick={() => {
+            setText(reco);
+            setActive(false);
+          }}
+        >
+          {joinWithComponent(reco.split(text), <b>{text}</b>)}
+        </Recommendation>
+        )
+      });
   return (
     <Container>
       <Input
@@ -73,9 +77,12 @@ export default function RecommendationInput({
         type="text"
         value={text}
         onChange={e => {
-          console.log(e.target.value);
+          console.log(e);
           setText(e.target.value);
         }}
+        onKeyDown={e=>  
+          e.keyCode === 13 && defaultOption && defaultOption()
+        }
       />
       <RecommendationContainer
         color={Colors.secondary}
