@@ -8,9 +8,12 @@ import {Provider } from "react-redux";
 import {reducer, Actions} from "./store";
 
 import "./styles.css";
+import { CreateSheetButton } from "./controls/createsheet-button";
+import Tabs from "./components/tabs";
 
 const recommendations = ["Pizza", "Pasta", "Salad", "Lasagna", "Dessert"];
 const store = createStore(reducer);
+store.dispatch({type:Actions.initialize});
 function App() {
   let [nmb, sNmb] = React.useState(15);
   let [text, sText] = React.useState("default");
@@ -25,7 +28,10 @@ function App() {
         setText={sText}
         recommendations={recommendations}
       />
-      <PButton color={Colors.primary} onClick={()=>store.dispatch({type:Actions.createWorkoutSheet, payload:"stuff"})}>Create</PButton>
+      {/* <PButton color={Colors.primary} onClick={()=>store.dispatch({type:Actions.createWorkoutSheet, payload:"stuff"})}>Create</PButton> */}
+      <CreateSheetButton>Create</CreateSheetButton>
+
+      <Tabs names={[{value:"One", key:1}, "Two", "Three"]} onSelected={console.log}/>
     </div>
     </Provider>
   );
