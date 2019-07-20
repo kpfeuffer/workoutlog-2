@@ -1,6 +1,6 @@
 import {PButton, Colors} from "../components/button";
 import {connect} from "react-redux";
-import { Actions } from "../store";
+import { SheetActionTypes } from "../store";
 
 const mapStateToProps = (state)=> {
     return {
@@ -8,7 +8,7 @@ const mapStateToProps = (state)=> {
     }
 };
 const mapDipatchToProps = {
-    onClick: ()=>({type: Actions.createWorkoutSheet, payload:{}})
+    onClick: ()=>({type: SheetActionTypes.upsert, payload:{id:new Date().toISOString(), name:new Date().toISOString()}})
 };
 
 export const CreateSheetButton = connect(mapStateToProps, mapDipatchToProps)(PButton)
