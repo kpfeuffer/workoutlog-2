@@ -1,26 +1,18 @@
-export const Actions = {
-    initialize:"initalize",
-    createWorkoutSheet: "createWorkoutSheet"
-}
+import {createStore, combineReducers} from "redux";
+import {SheetReducer} from "./sheet/reducer";
+import {WorkoutReducer} from "./workout/reducer";
+import {SetReducer} from "./set/reducer";
 
-const initialState = {
-    sheets: []
-}
+export {SheetActionTypes} from "./sheet/reducer";
+export {WorkoutActionTypes} from "./workout/reducer";
+export {SetActionTypes} from "./set/reducer";
 
-export const reducer = (state, action)=> {
-    switch(action.type) {
-        case Actions.initialize: {
-            console.log("state initialized");
-            return initialState;
-        }break;
-        case Actions.createWorkoutSheet: {
-            console.log(state, action);
-        }break;
-        default: {
-            console.log('store defaulted', action);
-            return state;
-        }
-    }
-    return state;
-
+export const reducers = {
+    "SET":SetReducer,
+    "WORKOUT":WorkoutReducer,
+    "SHEET":SheetReducer
 }
+export const store = createStore(
+    combineReducers(reducers),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
