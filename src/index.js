@@ -10,10 +10,9 @@ import {reducer, Actions} from "./store";
 import "./styles.css";
 import { CreateSheetButton } from "./controls/createsheet-button";
 import Tabs from "./components/tabs";
+import {store} from "./store";
+import SheetListing from "./controls/sheet-listing";
 
-const recommendations = ["Pizza", "Pasta", "Salad", "Lasagna", "Dessert"];
-const store = createStore(reducer);
-store.dispatch({type:Actions.initialize});
 function App() {
   let [nmb, sNmb] = React.useState(15);
   let [text, sText] = React.useState("default");
@@ -22,16 +21,19 @@ function App() {
     <div className="App">
       {/* <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>*/}
-      <NumberPicker number={nmb} setNumber={sNmb} />
-      <RecommendationInput
+      {/* <NumberPicker number={nmb} setNumber={sNmb} /> */}
+      {/* <RecommendationInput
         text={text}
         setText={sText}
         recommendations={recommendations}
-      />
+      /> */}
       {/* <PButton color={Colors.primary} onClick={()=>store.dispatch({type:Actions.createWorkoutSheet, payload:"stuff"})}>Create</PButton> */}
-      <CreateSheetButton>Create</CreateSheetButton>
+      <SheetListing>
+        <div style={{"float":"left"}}>
+          <CreateSheetButton>Create</CreateSheetButton>
+        </div>
+      </SheetListing>
 
-      <Tabs names={[{value:"One", key:1}, "Two", "Three"]} onSelected={console.log}/>
     </div>
     </Provider>
   );
