@@ -22,7 +22,8 @@ const Tab = styled.button`
 
 export default function Tabs ({
     names,
-    onSelected
+    onSelected,
+    children
 }) {
     const tabs = names.map((name)=>typeof name == "string" && (
         <Tab key={name} color={Colors.tertiary} onClick={()=>onSelected(name)}>{name}</Tab>
@@ -31,6 +32,6 @@ export default function Tabs ({
     ))
     return (
 
-        <TabContainer >{tabs}</TabContainer>
+        <TabContainer >{tabs}{children}</TabContainer>
     )
 }
